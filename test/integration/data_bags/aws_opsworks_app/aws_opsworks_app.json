@@ -1,0 +1,35 @@
+{
+  "app_id": "1234567890",
+  "app_source": {
+    "password": null,
+    "revision": null,
+    "ssh_key": null,
+    "type": "git",
+    "url": "https://github.com/GovWizely/googl_api",
+    "user": null
+  },
+  "attributes": {
+    "auto_bundle_on_deploy": true,
+    "aws_flow_ruby_settings": {},
+    "document_root": null,
+    "rails_env": "test"
+  },
+  "data_sources": [{"type": "None"}],
+  "domains": ["googl.govwizely.com"],
+  "enable_ssl": false,
+  "environment": {
+    "S3REGION": "us-west-2",
+    "BUCKET": "example-app",
+    "FILENAME": "default.htm",
+    "GOOGL_API_KEY": "also_a_secret"
+  },
+  "name": "googl_api",
+  "shortname": "googl_api",
+  "ssl_configuration": {
+    "certificate": null,
+    "private_key": null,
+    "chain": null
+  },
+  "type": "other",
+  "deploy": true
+}
