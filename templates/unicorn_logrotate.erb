@@ -1,0 +1,13 @@
+<%= @deploy_to %>/log/*.log {
+daily
+missingok
+rotate 14
+compress
+delaycompress
+notifempty
+sharedscripts
+lastaction
+[ -s <%= @deploy_to %>/tmp/unicorn.pid ] && kill -USR1 `cat <%= @deploy_to %>/tmp/unicorn.pid`
+endscript
+su <%= @user %> <%= @group %>
+}
