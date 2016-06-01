@@ -34,7 +34,7 @@ enables the `nginx` site.
 
 - Operating system: Ubuntu 14.04 LTS
 - Repository URL: `git@github.com:GovWizely/googl_api_cookbook.git`
-- Branch/Revision: `master`
+- Branch/Revision: `production` in production and `master` anywhere else
 
 ### Layer settings
 
@@ -50,7 +50,7 @@ enables the `nginx` site.
 - Name: `googl_api`
 - Data source type: `None`
 - Repository URL: `https://github.com/GovWizely/googl_api`
-- Branch/Revision: `master`
+- Branch/Revision: `production` in production and `master` anywhere else
 - Protected environment variables:
   - `GOOGL_API_KEY`
 - Enable SSL: Yes
@@ -72,3 +72,13 @@ rubocop are made using the supplied `.rubocop.yml` file
 
 This cookbook supplies a data bag called `aws_opsworks_app` under `test/integration/` that mimics the 
 JSON for an AWS OpsWorks app.
+
+# Workflow
+
+- Make your changes in `source` branch.
+- Commit and push your changes to origin.
+- Run `rake build_remote` to push vendored cookbooks to `master`.
+
+## Acknowledgments
+
+Thanks to [David Pranata](https://github.com/davidpranata) for all the help, code, and advice!
