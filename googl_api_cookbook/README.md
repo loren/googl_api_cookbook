@@ -1,8 +1,8 @@
 # Googl API Cookbook
 
 The Googl API Cookbook installs and configures ruby, unicorn, and nginx to run 
-the [googl_api](https://github.com/GovWizely/googl_api) Rails app. This cookbook supports Chef 12.8+ and 
-implements support for testing with test-kitchen 1.6+.
+the [googl_api](https://github.com/GovWizely/googl_api) Rails app. This cookbook supports Chef 12.10+ and 
+implements support for testing with test-kitchen 1.8+.
 
 ## Pre-requisites
 
@@ -32,9 +32,9 @@ enables the `nginx` site.
 
 ### Stack settings
 
-- Operating system: Ubuntu 14.04 LTS
+- Operating system: Ubuntu 16.04 LTS
 - Repository URL: `git@github.com:GovWizely/googl_api_cookbook.git`
-- Branch/Revision: `production` in production and `master` anywhere else
+- Branch/Revision: `master`
 
 ### Layer settings
 
@@ -50,7 +50,7 @@ enables the `nginx` site.
 - Name: `googl_api`
 - Data source type: `None`
 - Repository URL: `https://github.com/GovWizely/googl_api`
-- Branch/Revision: `production` in production and `master` anywhere else
+- Branch/Revision: `master`
 - Protected environment variables:
   - `GOOGL_API_KEY`
 - Enable SSL: Yes
