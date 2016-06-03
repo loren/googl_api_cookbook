@@ -53,6 +53,7 @@ enables the `nginx` site.
 - Branch/Revision: `master`
 - Protected environment variables:
   - `GOOGL_API_KEY`
+  - `RUBY_VERSION` Set this to be the version of Ruby specified in googl_api Gemfile 
 - Enable SSL: Yes
 
 ## Testing
