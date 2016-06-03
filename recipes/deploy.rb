@@ -6,6 +6,72 @@ end
 
 deploy_to = "#{node['deploy']['root_directory']}/#{application_hash['shortname']}"
 
+service 'nginx' do
+  supports status: true, restart: true, reload: true
+end
+
+magic_shell_environment 'PATH' do
+  value '/opt/ruby_build/builds/2.3/bin:$PATH'
+end
+
+magic_shell_environment 'GOOGL_API_KEY' do
+  value application_hash['environment']['GOOGL_API_KEY']
+end
+
+template '/etc/nginx/nginx.conf' do
+  cookbook 'googl_api_cookbook'
+  mode '0600'
+  source 'googl_api_nginx.conf.erb'
+  notifies :restart, 'service[nginx]'
+end
+
+directory '/etc/nginx/ssl' do
+  action :create
+  owner 'root'
+  group 'root'
+  mode '0600'
+end
+
+template "/etc/nginx/ssl/#{application_hash['domains'].first}.crt" do
+  cookbook 'googl_api_cookbook'
+  mode '0600'
+  source 'ssl.key.erb'
+  variables key: application_hash['ssl_configuration']['certificate']
+  notifies :restart, 'service[nginx]'
+  only_if { application_hash['enable_ssl'] }
+end
+
+template "/etc/nginx/ssl/#{application_hash['domains'].first}.key" do
+  cookbook 'googl_api_cookbook'
+  mode '0600'
+  source 'ssl.key.erb'
+  variables key: application_hash['ssl_configuration']['private_key']
+  notifies :restart, 'service[nginx]'
+  only_if { application_hash['enable_ssl'] }
+end
+
+template "/etc/nginx/ssl/#{application_hash['domains'].first}.ca" do
+  cookbook 'googl_api_cookbook'
+  mode '0600'
+  source 'ssl.key.erb'
+  variables key: application_hash['ssl_configuration']['chain']
+  notifies :restart, 'service[nginx]'
+  only_if { application_hash['enable_ssl'] && application_hash['ssl_configuration']['chain'] }
+end
+
+template "/etc/logrotate.d/#{application_hash['shortname']}" do
+  cookbook 'googl_api_cookbook'
+  source 'unicorn_logrotate.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(
+    deploy_to: deploy_to,
+    user: node['googl_api']['user']['username'],
+    group: node['googl_api']['user']['group']
+  )
+end
+
 application deploy_to do
   environment GOOGL_API_KEY: application_hash['environment']['GOOGL_API_KEY']
   owner node['googl_api']['user']['username']
@@ -35,11 +101,7 @@ application deploy_to do
   end
 end
 
-service 'nginx' do
-  supports status: true, restart: true, reload: true
-end
-
-template "#{node['nginx']['dir']}/sites-available/default" do
+template '/etc/nginx/sites-available/default' do
   cookbook 'googl_api_cookbook'
   source 'default.erb'
   owner 'root'
