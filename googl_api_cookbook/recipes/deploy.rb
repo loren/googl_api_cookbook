@@ -10,10 +10,6 @@ service 'nginx' do
   supports status: true, restart: true, reload: true
 end
 
-magic_shell_environment 'PATH' do
-  value '/opt/ruby_build/builds/2.3/bin:$PATH'
-end
-
 magic_shell_environment 'GOOGL_API_KEY' do
   value application_hash['environment']['GOOGL_API_KEY']
 end
@@ -81,9 +77,11 @@ application deploy_to do
     group node['googl_api']['user']['group']
     repository application_hash['app_source']['url']
   end
-  ruby_runtime '2.3' do
+  ruby_version = application_hash['environment']['RUBY_VERSION']
+  ruby_bin = "/opt/ruby_build/builds/#{ruby_version}/bin"
+  ruby_runtime ruby_version do
     provider :ruby_build
-    version '2.3'
+    version ruby_version
   end
   bundle_install do
     user node['googl_api']['user']['username']
@@ -95,9 +93,12 @@ application deploy_to do
   end
   unicorn
   # Set config file in unicorn block when https://github.com/poise/application_ruby/pull/83 is merged
-  ruby_bin = '/opt/ruby_build/builds/2.3/bin'
   poise_service_options deploy_to do
     command "#{ruby_bin}/ruby #{ruby_bin}/bundle exec #{ruby_bin}/ruby #{deploy_to}/vendor/bundle/ruby/2.3.0/bin/unicorn -c config/unicorn.rb #{deploy_to}/config.ru"
+  end
+
+  magic_shell_environment 'PATH' do
+    value "#{ruby_bin}:$PATH"
   end
 end
 

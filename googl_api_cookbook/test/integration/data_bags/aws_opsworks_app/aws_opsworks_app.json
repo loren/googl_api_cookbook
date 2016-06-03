@@ -21,7 +21,8 @@
     "S3REGION": "us-west-2",
     "BUCKET": "example-app",
     "FILENAME": "default.htm",
-    "GOOGL_API_KEY": "also_a_secret"
+    "GOOGL_API_KEY": "also_a_secret",
+    "RUBY_VERSION": "2.3.1"
   },
   "name": "googl_api",
   "shortname": "googl_api",

@@ -17,7 +17,7 @@ describe file('/etc/profile.d/GOOGL_API_KEY.sh') do
 end
 
 describe file('/etc/profile.d/PATH.sh') do
-  its('content') { is_expected.to include('export PATH="/opt/ruby_build/builds/2.3/bin:$PATH"') }
+  its('content') { is_expected.to include('export PATH="/opt/ruby_build/builds/2.3.1/bin:$PATH"') }
 end
 
 describe file('/etc/logrotate.d/googl_api') do
@@ -50,6 +50,6 @@ describe file('/srv/googl_api/config/secrets.yml') do
   its('content') { is_expected.to include('secret_key_base: also_a_secret') }
 end
 
-describe command '/opt/ruby_build/builds/2.3/bin/ruby -v' do
-  its('stdout') { is_expected.to include('ruby 2.3') }
+describe command '/opt/ruby_build/builds/2.3.1/bin/ruby -v' do
+  its('stdout') { is_expected.to include('ruby 2.3.1') }
 end
