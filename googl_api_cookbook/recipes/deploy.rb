@@ -14,10 +14,11 @@ magic_shell_environment 'GOOGL_API_KEY' do
   value application_hash['environment']['GOOGL_API_KEY']
 end
 
-template '/etc/nginx/nginx.conf' do
-  cookbook 'googl_api_cookbook'
+cookbook_file '/etc/nginx/nginx.conf' do
   mode '0600'
-  source 'googl_api_nginx.conf.erb'
+  owner 'root'
+  group 'root'
+  source 'nginx.conf'
   notifies :restart, 'service[nginx]'
 end
 
@@ -29,7 +30,6 @@ directory '/etc/nginx/ssl' do
 end
 
 template "/etc/nginx/ssl/#{application_hash['domains'].first}.crt" do
-  cookbook 'googl_api_cookbook'
   mode '0600'
   source 'ssl.key.erb'
   variables key: application_hash['ssl_configuration']['certificate']
@@ -38,7 +38,6 @@ template "/etc/nginx/ssl/#{application_hash['domains'].first}.crt" do
 end
 
 template "/etc/nginx/ssl/#{application_hash['domains'].first}.key" do
-  cookbook 'googl_api_cookbook'
   mode '0600'
   source 'ssl.key.erb'
   variables key: application_hash['ssl_configuration']['private_key']
@@ -47,7 +46,6 @@ template "/etc/nginx/ssl/#{application_hash['domains'].first}.key" do
 end
 
 template "/etc/nginx/ssl/#{application_hash['domains'].first}.ca" do
-  cookbook 'googl_api_cookbook'
   mode '0600'
   source 'ssl.key.erb'
   variables key: application_hash['ssl_configuration']['chain']
@@ -56,7 +54,6 @@ template "/etc/nginx/ssl/#{application_hash['domains'].first}.ca" do
 end
 
 template "/etc/logrotate.d/#{application_hash['shortname']}" do
-  cookbook 'googl_api_cookbook'
   source 'unicorn_logrotate.erb'
   owner 'root'
   group 'root'
@@ -103,7 +100,6 @@ application deploy_to do
 end
 
 template '/etc/nginx/sites-available/default' do
-  cookbook 'googl_api_cookbook'
   source 'default.erb'
   owner 'root'
   group 'root'
