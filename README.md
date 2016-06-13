@@ -1,7 +1,5 @@
 # Googl API Cookbook
 
-[![Build Status](https://travis-ci.org/GovWizely/googl_api_cookbook.svg?branch=source)](https://travis-ci.org/GovWizely/googl_api_cookbook/)
-
 The Googl API Cookbook installs and configures ruby, unicorn, and nginx to run 
 the [googl_api](https://github.com/GovWizely/googl_api) Rails app. This cookbook supports Chef 12.10+ and 
 implements support for testing with test-kitchen 1.8+.
