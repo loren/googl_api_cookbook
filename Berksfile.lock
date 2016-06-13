@@ -35,7 +35,6 @@ GRAPH
   googl_api_cookbook (0.1.0)
     application_git (>= 0.0.0)
     application_ruby (~> 4.0.1)
-    apt (>= 0.0.0)
     magic_shell (>= 0.0.0)
     nginx (~> 2.7.6)
     openssl (>= 0.0.0)

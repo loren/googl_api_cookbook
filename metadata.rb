@@ -8,7 +8,6 @@ issues_url 'https://github.com/GovWizely/googl_api_cookbook/issues'
 source_url 'https://github.com/GovWizely/googl_api_cookbook'
 version '0.1.0'
 
-depends 'apt'
 depends 'nginx', '~> 2.7.6'
 depends 'application_ruby', '~> 4.0.1'
 depends 'application_git'
