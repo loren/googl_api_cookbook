@@ -8,7 +8,6 @@
   "platforms": {
   },
   "dependencies": {
-    "apt": ">= 0.0.0",
     "nginx": "~> 2.7.6",
     "application_ruby": "~> 4.0.1",
     "application_git": ">= 0.0.0",
