@@ -13,7 +13,8 @@
     "application_ruby": "~> 4.0.1",
     "application_git": ">= 0.0.0",
     "poise-ruby-build": ">= 0.0.0",
-    "magic_shell": ">= 0.0.0"
+    "magic_shell": ">= 0.0.0",
+    "openssl": ">= 0.0.0"
   },
   "recommendations": {
   },

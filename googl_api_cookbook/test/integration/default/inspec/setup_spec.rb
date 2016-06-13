@@ -12,3 +12,7 @@ describe user('deploy') do
   its('home') { should eq '/home/deploy' }
   its('shell') { should eq '/bin/bash' }
 end
+
+describe file('/etc/ssl/certs/dhparam.pem') do
+  its('content') { is_expected.to include('BEGIN DH PARAMETERS') }
+end
