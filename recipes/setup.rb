@@ -14,3 +14,8 @@ user node['googl_api']['user']['username'] do
   system true
   shell node['googl_api']['user']['shell']
 end
+
+openssl_dhparam '/etc/ssl/certs/dhparam.pem' do
+  key_length 2048
+  generator 2
+end
